@@ -1,6 +1,8 @@
 @extends('layout.app')
 
 @section("contenu")
+    @vite(['resources/css/test-vite.css'])
+
     <div class="container">
         <h1>Test de Vite</h1>
         <img class="logo" src="{{Vite::asset('resources/images/logo.jpg')}}" alt="Logo">
@@ -36,8 +38,6 @@
         <h2>Les polices de caractères</h2>
         <h3>Police locale</h3>
         <p class="shadow">Utilisation d'une police de caractères différente</p>
-        <h3>Police sur le net</h3>
-        <p class="redact">Utilisation d'une police de caractères différente</p>
 
 
         <h2>Utilisation de javascript</h2>
@@ -65,10 +65,9 @@
                 </p>
             </li>
         </ul>
-
-        <p>Appeler comme résultat du traitement de la requête <code>/test-vite</code> qui utilise la vue
-            <code>test-vite.blade.php</code> qui est le <i>slot</i> du composant <code>TestLayout</code>.</p>
     </div>
 
-    @endsection
+    @vite(['resources/js/test-vite.js'])
+
+@endsection
 

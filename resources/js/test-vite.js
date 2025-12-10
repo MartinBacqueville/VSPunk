@@ -12,3 +12,4 @@ function calculer() {
         francs.innerHTML = ( valeur * 6.55957 ).toFixed( 2 );
     }
 }
+
