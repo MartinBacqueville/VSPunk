@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreignIdFor(\App\Models\Article::class)->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->boolean("nature");
         });
     }
 

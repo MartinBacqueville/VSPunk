@@ -17,10 +17,12 @@ class LikesSeeder extends Seeder {
 
         $articles = Article::all();
         foreach($articles as $article) {
-            $nbLikes = $faker->numberBetween(2, 10);
+            $nbLikes = $faker->numberBetween(2, 9);
             $userIds = User::pluck('id');
             $userIdsSelected = $faker->randomElements($userIds, $nbLikes);
-            $article->likes()->attach($userIdsSelected);
+            foreach($userIdsSelected as $id)
+                $article->likes()->attach($id, ["nature" => $faker->numberBetween(0,1) ]);
+
         }
     }
 }

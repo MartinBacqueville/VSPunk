@@ -17,7 +17,7 @@ class Article extends Model
     }
 
     public function likes() {
-        return $this->belongsToMany(User::class, 'likes');
+        return $this->belongsToMany(User::class, 'likes')->withPivot("nature");
     }
 
     public function accessibilite() {
