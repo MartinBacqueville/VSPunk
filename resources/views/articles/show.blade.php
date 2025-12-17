@@ -5,7 +5,7 @@
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
             <div class="nav-buttons">
                 @auth
-                    <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
+                    <a href="{{ route('articles.create') }}" class="btn-outline">Ajouter un article</a>
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
@@ -64,11 +64,46 @@
                     <p style="margin-top: 20px; opacity: 0.7;">
                         Nombre de vues : {{ $article->nb_vues }}
                     </p>
+
+                    @auth
+                        @php
+                            $userReaction = $article->likes
+                                ->where('id', auth()->id())
+                                ->first()
+                                ->pivot->nature ?? null;
+
+                            $likesCount = $article->likes->where('pivot.nature', 'like')->count();
+                            $dislikesCount = $article->likes->where('pivot.nature', 'dislike')->count();
+                        @endphp
+
+                        <div style="margin-top: 20px;">
+                            <form method="POST" action="{{ route('articles.like', $article) }}" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="nature" value="like">
+                                <button type="submit">
+                                    👍 Like {{ $userReaction === 'like' ? '(actif)' : '' }}
+                                </button>
+                            </form>
+
+                            <form method="POST" action="{{ route('articles.like', $article) }}" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="nature" value="dislike">
+                                <button type="submit">
+                                    👎 Dislike {{ $userReaction === 'dislike' ? '(actif)' : '' }}
+                                </button>
+                            </form>
+
+                            <p>
+                                👍 {{ $likesCount }} likes |
+                                👎 {{ $dislikesCount }} dislikes
+                            </p>
+                        </div>
+                    @endauth
+
                 </div>
             </div>
         </div>
 
-        <!-- Section retour -->
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
                 style="transform: scaleX(-1);">
