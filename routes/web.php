@@ -27,7 +27,7 @@ Route::get('/test-vite', function () {
 })->name("test-vite");
 
 Route::get('/home', function () {
-    return view('home');
+    return redirect()->route('accueil');
 })->name("home");
 
 Route::get('/articles/{id}', [ArticleShowController::class, 'show'])
