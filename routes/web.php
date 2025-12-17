@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\ArticleController;
@@ -7,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Models\Article;
 use App\Http\Controllers\ArticleShowController;
+use App\Http\Controllers\ArticleLikeController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('accueil');
@@ -38,4 +40,13 @@ Route::get('/user/{id}', [UserController::class, 'show'])
 
 Route::post('/user/{id}/follow', [UserController::class, 'follow'])
     ->name('user.follow');
+
+Route::post('/articles/{article}/like', [ArticleLikeController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('articles.like');
+
+Route::get('/articles/create', function () {
+    return 'Page création article (à faire)';
+})->name('articles.create');
+
 
