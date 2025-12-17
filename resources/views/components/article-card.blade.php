@@ -36,8 +36,28 @@
         </p>
 
         <ul >
-            <li>Rythme : {{ $article->rythme->texte ?? 'Non défini' }}</li>
-            <li>Accessibilité : {{ $article->accessibilite->texte ?? 'Non définie' }}</li>
+            <li>
+                Rythme :
+                @if($article->rythme)
+                    <a href="{{ route('articles.index', ['searchR' => $article->rythme->texte]) }}">
+                        {{ $article->rythme->texte }}
+                    </a>
+                @else
+                    Non défini
+                @endif
+            </li>
+
+            <li>
+                Accessibilité :
+                @if($article->accessibilite)
+                    <a href="{{ route('articles.index', ['searchAccess' => $article->accessibilite->texte]) }}">
+                        {{ $article->accessibilite->texte }}
+                    </a>
+                @else
+                    Non définie
+                @endif
+            </li>
+
         </ul>
 
         <p >
