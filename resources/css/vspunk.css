@@ -1,0 +1,500 @@
+/* ==========================================
+   VS PUNK - Styles
+   Reproduction fidèle du design punk
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto+Mono:wght@400;500;700&display=swap');
+
+:root {
+    /* Couleurs principales basées sur la maquette */
+    --bg-dark: #3d3230;
+    --bg-paper: #d4c4a8;
+    --bg-paper-light: #e0d4c0;
+    --bg-footer: #d8c8ac;
+    --accent-yellow: #dfff00;
+    --accent-pink: #d94ba0;
+    --text-black: #1a1a1a;
+    --text-dark: #2a2a2a;
+
+    /* Typographie */
+    --font-hand: 'Permanent Marker', cursive;
+    --font-body: 'Roboto Mono', monospace;
+}
+
+/* Reset et base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-dark);
+    font-family: var(--font-body);
+    color: var(--bg-paper);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.header {
+    position: relative;
+    background-color: var(--bg-paper);
+}
+
+.top-buttons {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+}
+
+/* Boutons */
+.btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: var(--font-hand);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-black {
+    background-color: #1a1a1a;
+    color: var(--bg-paper);
+}
+
+.btn-black:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-beige {
+    background-color: var(--bg-paper);
+    color: var(--text-black);
+    font-size: 0.95rem;
+    padding: 10px 22px;
+    border: 2px solid transparent;
+}
+
+.btn-beige:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Image - PLEIN ÉCRAN */
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+
+/* Effet papier déchiré en bas - très irrégulier */
+.torn-paper-edge {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background-color: var(--bg-dark);
+    clip-path: polygon(0% 70%, 3% 40%, 5% 85%, 8% 25%, 10% 75%,
+            13% 35%, 15% 90%, 18% 20%, 20% 80%, 23% 45%,
+            25% 95%, 28% 30%, 30% 70%, 33% 50%, 35% 85%,
+            38% 25%, 40% 75%, 43% 40%, 45% 90%, 48% 30%,
+            50% 80%, 53% 45%, 55% 95%, 58% 25%, 60% 70%,
+            63% 40%, 65% 85%, 68% 30%, 70% 75%, 73% 50%,
+            75% 90%, 78% 20%, 80% 80%, 83% 35%, 85% 95%,
+            88% 25%, 90% 70%, 93% 45%, 95% 85%, 98% 30%,
+            100% 70%, 100% 100%, 0% 100%);
+}
+
+/* ==========================================
+   STICKERS / DOODLES
+   ========================================== */
+.sticker {
+    position: absolute;
+    z-index: 50;
+    pointer-events: none;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Logo punk jaune "4D" (en bas à gauche du header, sur l'image) */
+.logo-punk {
+    width: 85px;
+    height: auto;
+    bottom: 5px;
+    left: 20px;
+    transform: rotate(-5deg);
+    z-index: 60;
+}
+
+/* Œil dessiné (à gauche, sous la barre de recherche) */
+.eye-doodle {
+    width: 70px;
+    height: auto;
+    top: 25px;
+    left: 20px;
+    transform: rotate(-5deg);
+}
+
+/* Éclairs roses (droite, très visibles) */
+.lightning-pink {
+    width: 110px;
+    height: auto;
+    top: -60px;
+    right: 20px;
+    transform: rotate(5deg);
+}
+
+/* Crâne blanc/beige (droite, en dessous des éclairs) */
+.skull-doodle {
+    width: 75px;
+    height: auto;
+    top: 100px;
+    right: 20px;
+    transform: rotate(5deg);
+}
+
+/* Flammes roses/violettes (bas droite) */
+.fire-pink {
+    width: 60px;
+    height: auto;
+    bottom: 120px;
+    right: 45px;
+    transform: rotate(-5deg);
+}
+
+/* ==========================================
+   MAIN CONTENT
+   ========================================== */
+.main-content {
+    position: relative;
+    padding: 50px 20px 30px;
+    min-height: 450px;
+}
+
+/* Barre de recherche */
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 45px;
+}
+
+.search-bar {
+    background-color: var(--bg-paper-light);
+    padding: 12px 18px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+    gap: 10px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.search-icon {
+    color: #555;
+    flex-shrink: 0;
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    width: 100%;
+    color: var(--text-black);
+}
+
+.search-bar input::placeholder {
+    color: #666;
+}
+
+/* ==========================================
+   CARDS
+   ========================================== */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
+    padding: 0 15px;
+}
+
+.card {
+    background-color: var(--bg-paper);
+    width: 165px;
+    border-radius: 10px 10px 20px 20px;
+    overflow: hidden;
+    color: var(--text-black);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px) rotate(1deg);
+}
+
+.card-img-holder {
+    position: relative;
+    height: 165px;
+    overflow: hidden;
+}
+
+.card-img-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Badge "tire" en haut à droite */
+.card-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(20, 20, 20, 0.85);
+    color: #fff;
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    z-index: 5;
+    letter-spacing: 0.3px;
+}
+
+/* Overlay pour le titre de l'album */
+.album-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.album-title-wrapper {
+    text-align: center;
+    padding: 8px;
+}
+
+/* Style pour la carte 1 - PUNK */
+.album-title-wrapper.punk-style {
+    background: linear-gradient(135deg,
+            rgba(200, 50, 150, 0.75) 0%,
+            rgba(100, 180, 80, 0.6) 50%,
+            rgba(220, 200, 50, 0.7) 100%);
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.album-title {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    color: var(--accent-yellow);
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.album-subtitle {
+    font-family: var(--font-hand);
+    font-size: 0.65rem;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    line-height: 1.2;
+}
+
+/* Style pour la carte 2 - THE SIMULATION */
+.album-title-wrapper.simulation-style {
+    background: rgba(20, 20, 20, 0.5);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.album-title-alt {
+    font-family: var(--font-hand);
+    font-size: 0.95rem;
+    color: var(--accent-pink);
+    text-shadow: 2px 2px 0 #000, -1px -1px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+}
+
+.card-body {
+    padding: 10px 12px 12px;
+    background: var(--bg-paper);
+}
+
+.card-body .desc {
+    font-size: 0.75rem;
+    margin-bottom: 3px;
+    color: var(--text-dark);
+}
+
+.card-body .author {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-black);
+}
+
+/* ==========================================
+   SEE MORE SECTION
+   ========================================== */
+.see-more-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    gap: 12px;
+}
+
+.arrow-doodle {
+    width: 50px;
+    height: auto;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer {
+    background-color: var(--bg-footer);
+    color: var(--text-black);
+    padding: 35px 20px 30px;
+    margin-top: 50px;
+    position: relative;
+}
+
+.footer-content {
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.footer h3 {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.footer p {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+}
+
+.copyright {
+    font-size: 0.7rem;
+    margin-top: 18px;
+    opacity: 0.85;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 600px) {
+    .hero-image-container {
+        height: 100vh;
+    }
+
+    .logo-punk {
+        width: 60px;
+        left: 12px;
+        bottom: 3px;
+    }
+
+    .lightning-pink {
+        width: 80px;
+        right: 12px;
+        top: -40px;
+    }
+
+    .skull-doodle {
+        width: 55px;
+        right: 10px;
+        top: 70px;
+    }
+
+    .fire-pink {
+        width: 45px;
+        right: 25px;
+        bottom: 90px;
+    }
+
+    .eye-doodle {
+        width: 50px;
+        left: 10px;
+        top: 20px;
+    }
+
+    .cards-container {
+        gap: 18px;
+    }
+
+    .card {
+        width: 150px;
+    }
+
+    .card-img-holder {
+        height: 150px;
+    }
+
+    .search-bar {
+        width: 260px;
+    }
+
+    .top-buttons {
+        top: 8px;
+        right: 8px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .main-content {
+        padding: 40px 15px 25px;
+    }
+}
+
+@media (max-width: 400px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 170px;
+    }
+
+    .card-img-holder {
+        height: 170px;
+    }
+}
