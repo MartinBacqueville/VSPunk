@@ -1,8 +1,9 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Models\Article;
 
+use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,5 +20,10 @@ Route::get('/test-vite', function () {
 Route::get('/home', function () {
     return view('home');
 })->name("home");
+
+Route::get('/articles/{id}', [ArticleController::class, 'show'])
+    ->name('articles.show');
+
+
 
 
