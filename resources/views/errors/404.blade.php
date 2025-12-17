@@ -12,10 +12,10 @@
 <body>
 
     <!-- Stickers décoratifs -->
-    <img src="/images/asset/1.png" alt="" class="sticker sticker-1">
-    <img src="/images/asset/3.png" alt="" class="sticker sticker-2">
-    <img src="/images/asset/4.png" alt="" class="sticker sticker-3">
-    <img src="/images/asset/5.png" alt="" class="sticker sticker-4">
+    <img src="{{asset('images/asset/1.png')}}" alt="" class="sticker sticker-1">
+    <img src="{{asset('images/asset/3.png')}}" alt="" class="sticker sticker-2">
+    <img src="{{asset('images/asset/4.png')}}" alt="" class="sticker sticker-3">
+    <img src="{{asset('images/asset/5.png')}}" alt="" class="sticker sticker-4">
 
     <!-- Étoiles punk -->
     <span class="punk-star star-1">★</span>
