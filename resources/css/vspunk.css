@@ -140,7 +140,7 @@ body {
 
 /* Œil dessiné  */
 .eye-doodle {
-    width: 120px;
+    width: 1px;
     height: auto;
     top: 45px;
     left: 5%;
@@ -969,10 +969,107 @@ body {
     border-bottom: 1px dashed #aaa;
 }
 
-.article-show-content audio {
-    width: 100%;
-    margin: 15px 0;
-    border-radius: 10px;
+
+.media-player-section {
+    margin: 25px 0;
+    padding: 20px;
+    background: var(--bg-paper);
+    border: 3px solid var(--text-black);
+    border-radius: 15px;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.media-player-section h2 {
+    font-family: var(--font-hand);
+    font-size: 1.3rem;
+    color: var(--text-black);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.media-player-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--text-black);
+    padding: 15px 20px;
+    border-radius: 12px;
+}
+
+.media-player-icon {
+    font-size: 2rem;
+    animation: pulse-music 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-music {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.punk-audio-player {
+    flex: 1;
+    height: 45px;
+    border-radius: 8px;
+    background: transparent;
+}
+
+
+.punk-audio-player::-webkit-media-controls-panel {
+    background: var(--bg-paper-light);
+    border-radius: 8px;
+}
+
+.punk-audio-player::-webkit-media-controls-play-button {
+    background-color: var(--accent-pink);
+    border-radius: 50%;
+    transform: scale(1.2);
+}
+
+.punk-audio-player::-webkit-media-controls-current-time-display,
+.punk-audio-player::-webkit-media-controls-time-remaining-display {
+    color: var(--text-black);
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.punk-audio-player::-webkit-media-controls-timeline {
+    background: var(--bg-paper);
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+
+.punk-audio-player::-moz-range-track {
+    background: var(--bg-paper);
+}
+
+.punk-audio-player::-moz-range-thumb {
+    background: var(--accent-pink);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .media-player-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .media-player-icon {
+        font-size: 1.5rem;
+    }
+
+    .punk-audio-player {
+        width: 100%;
+    }
 }
 
 
@@ -1256,7 +1353,7 @@ body {
     border: 2px solid var(--text-black);
 }
 
-/ .empty-message {
+.empty-message {
     font-family: var(--font-body);
     font-size: 0.9rem;
     color: #666;
@@ -1506,5 +1603,98 @@ body {
     .auth-sticker-3,
     .auth-sticker-4 {
         display: none;
+    }
+}
+
+
+
+.reactions-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px dashed #999;
+}
+
+.reactions-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.reactions-buttons form {
+    display: inline-block;
+}
+
+.reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 2px solid var(--text-black);
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--bg-paper);
+    color: var(--text-black);
+}
+
+.reaction-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.reaction-btn:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.reaction-like.active {
+    background: var(--text-black);
+    color: var(--bg-paper);
+}
+
+
+.reaction-dislike.active {
+    background: var(--text-black);
+    color: var(--bg-paper);
+}
+
+
+.reaction-icon {
+    font-size: 1.1rem;
+}
+
+
+.reaction-text {
+    font-weight: 500;
+}
+
+
+.reaction-count {
+    background: var(--bg-paper-light);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--text-black);
+}
+
+.reaction-btn.active .reaction-count {
+    background: var(--bg-paper);
+    color: var(--text-black);
+}
+
+
+@media (max-width: 480px) {
+    .reactions-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .reaction-btn {
+        justify-content: center;
     }
 }
