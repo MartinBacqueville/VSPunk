@@ -1,6 +1,5 @@
 <x-layout.app title="Profil de {{ $user->name }}">
     <div class="user-profile-page">
-        <!-- Header punk -->
         <header class="articles-header">
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
             <div class="nav-buttons">
@@ -19,7 +18,6 @@
 
         <div class="user-profile-container">
             <div class="user-profile-card">
-                <!-- Header du profil avec avatar -->
                 <div class="user-profile-header">
                     <div class="user-avatar">
                         @if($user->avatar)
@@ -37,7 +35,6 @@
                     </div>
                 </div>
 
-                <!-- Section Préférences -->
                 <div class="user-section">
                     <h2>Préférences</h2>
 
@@ -83,7 +80,6 @@
                     </ul>
                 </div>
 
-                <!-- Bouton Follow -->
                 <div class="follow-button-container">
                
                     <x-follow-button :user="$user" />
@@ -93,7 +89,6 @@
                                </div>
         </div>
 
-        <!-- Section retour -->
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
                 <path d="M5 20 Q20 15, 35 20 T65 20" stroke="#d4c4a8" stroke-width="3" fill="none" stroke-linecap="round"/>
@@ -103,7 +98,6 @@
             <a href="{{ route('articles.index') }}" class="btn-see-more">Retour aux articles</a>
         </div>
 
-        <!-- Footer -->
         <footer class="articles-footer">
             <h3>VS Punk</h3>
             <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens. Projet pédagogique mêlant création de contenu, design et développement web.</p>
