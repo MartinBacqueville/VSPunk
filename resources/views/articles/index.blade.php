@@ -65,7 +65,7 @@
             @endforeach
         </div>
 
-        >
+
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5 20 Q20 15, 35 20 T65 20" stroke="#d4c4a8" stroke-width="3" fill="none"
