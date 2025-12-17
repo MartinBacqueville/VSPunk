@@ -1,7 +1,4 @@
-@extends('layout.app')
-
-@section('content')
-
+<x-layout.app>
     <h1>{{ $article->titre }}</h1>
 
     <p>
@@ -38,5 +35,4 @@
     <p>
         Nombre de vues : {{ $article->nb_vues }}
     </p>
-
-@endsection
+</x-layout.app>

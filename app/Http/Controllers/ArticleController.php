@@ -6,15 +6,17 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function show(int $id)
+    public function index()
     {
-        $article = Article::with([
+        $articles = Article::with([
             'editeur',
             'rythme',
-            'accessibilite',
-            'conclusion'
-        ])->findOrFail($id);
+            'accessibilite'
+        ])
+            ->where('en_ligne', 1)
+            ->latest()
+            ->get();
 
-        return view('articles.show', compact('article'));
+        return view('articles.index', compact('articles'));
     }
 }
