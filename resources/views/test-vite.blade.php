@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('components.layout.app')
 
 @section("contenu")
     @vite(['resources/css/test-vite.css'])

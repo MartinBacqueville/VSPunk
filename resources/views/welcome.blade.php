@@ -1,7 +1,6 @@
-@extends("layout.app")
+@extends("components.layout.app")
 
 @section('contenu')
     C'est le point de départ.
-
 
 @endsection

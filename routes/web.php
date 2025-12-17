@@ -1,12 +1,22 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name("accueil");
+Route::get('/', [HomeController::class, 'index'])->name('accueil');
+
+
+Route::get('/articles/{article}', [ArticleController::class, 'show'])
+    ->name('articles.show');
+
+Route::get('/auteurs/{user}', [AuteurController::class, 'show'])
+    ->name('auteurs.show');
+
+Route::get('/articles', [ArticleController::class, 'index'])
+    ->name('articles.index');
 
 Route::get('/contact', function () {
     return view('contact');
