@@ -30,7 +30,7 @@
 
         <p>
             Par
-            <a href="{{ route('auteurs.show', $article->editeur) }}">
+            <a href="{{ route('user.show', $article->editeur->id) }}">
                 {{ $article->editeur->name }}
             </a>
         </p>

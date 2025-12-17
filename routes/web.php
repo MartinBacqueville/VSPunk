@@ -12,9 +12,6 @@ Route::get('/', [HomeController::class, 'index'])->name('accueil');
 Route::get('/articles/{article}', [ArticleController::class, 'show'])
     ->name('articles.show');
 
-Route::get('/auteurs/{user}', [AuteurController::class, 'show'])
-    ->name('auteurs.show');
-
 Route::get('/articles', [ArticleController::class, 'index'])
     ->name('articles.index');
 
@@ -32,7 +29,3 @@ Route::get('/home', function () {
 
 Route::get('/user/{id}', [App\Http\Controllers\UserController::class, 'show'])
     ->name('user.show');
-
-Route::post('/user/{id}/follow', [App\Http\Controllers\UserController::class, 'toggleFollow'])
-    ->middleware('auth')
-    ->name('user.follow');

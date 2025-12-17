@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout.app>
     <h1>Profil de {{ $user->name }}</h1>
     @if($user->avatar)
         <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar de {{ $user->name }}" width="150" height="150">
@@ -14,9 +14,12 @@
         <ul>
             @foreach($user->likes as $article)
                 <li>
-                    <a href="{{ route('article.show', $article->id) }}">{{ $article->title }}
+                    <a href="{{ route('articles.show', $article->id) }}">
+                        {{ $article->titre }}
+                    </a>
                     @if($article->image)
-                            <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" width="100">
+                        <br>
+                        <img src="{{ asset('storage' . $article->image) }}" alt="{{ $article->titre }}" width="100">
                     @endif
                 </li>
             @endforeach
@@ -25,27 +28,37 @@
         <p>Pas encore d’articles aimés.</p>
     @endif
 
+
     <h3>Top 3 rythmes préférés :</h3>
 
-    @forelse(
-        $user->likes
-            ->pluck('rythme')
-            ->filter()
-            ->groupBy('id')
-            ->map(fn($group) => ['rythme' => $group->first(), 'count' => $group->count()])
-            ->sortByDesc('count')
-            ->take(3)
-            as $rythme)
-        <li>{{ $rythme['rythme']->texte }} ({{ $rythme['count'] }} likes)</li>
-        @if(isset($rythme['rythme']->image))
-            <img src="{{ asset('storage/' . $rythme['rythme']->image) }}" alt="{{ $rythme['rythme']->texte }}" width="100">
-        @endif
-    @empty
-        <p>Aucun rythme enregistré.</p>
-    @endforelse
+    <ul>
+        @forelse(
+            $user->likes
+                ->pluck('rythme')
+                ->filter()
+                ->groupBy('id')
+                ->map(fn($group) => ['rythme' => $group->first(), 'count' => $group->count()])
+                ->sortByDesc('count')
+                ->take(3)
+            as $rythme
+        )
+            <li>
+                <a href="{{ route('rythme.show', $rythme['rythme']->id) }}">
+                    {{ $rythme['rythme']->texte }} ({{ $rythme['count'] }} likes)
+                </a>
+                @if(isset($rythme['rythme']->image))
+                    <br>
+                    <img src="{{ asset('storage' . $rythme['rythme']->image) }}" alt="{{ $rythme['rythme']->texte }}" width="100">
+                @endif
+            </li>
+        @empty
+            <p>Aucun rythme enregistré.</p>
+        @endforelse
+    </ul>
 
 
-@auth
+
+    @auth
         @if(auth()->id() !== $user->id)
         <form method="POST" action="{{ route('user.follow', $user->id) }}">
             @csrf
@@ -57,4 +70,4 @@
         </form>
         @endif
     @endauth
-</x-layout>
+</x-layout.app>
