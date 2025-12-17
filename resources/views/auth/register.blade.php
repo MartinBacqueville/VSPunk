@@ -1,11 +1,76 @@
-<x-layout.app>
-    <form action="{{route("register")}}" method="post">
-        @csrf
-        <input type="text" name="name" required placeholder="Name"/><br/>
-        <input type="email" name="email" required placeholder="Email"/><br/>
-        <input type="password" name="password" required placeholder="password"/><br/>
-        <input type="password" name="password_confirmation" required placeholder="password"/><br/>
-        <input type="submit"/><br/>
-    </form>
-    Déjà un compte ? <a href="{{route("login")}}">Connectez vous</a>
+<x-layout.app title="Créer un compte">
+    <div class="auth-page">
+        <!-- Header punk -->
+        <header class="articles-header">
+            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <div class="nav-buttons">
+                <a href="{{ route('login') }}" class="btn-outline">Se connecter</a>
+            </div>
+        </header>
+
+        <div class="auth-container">
+            <!-- Stickers décoratifs -->
+            <img src="{{ asset('images/asset/3.png') }}" alt="" class="auth-sticker auth-sticker-1"
+                onerror="this.style.display='none'">
+            <img src="{{ asset('images/asset/1.png') }}" alt="" class="auth-sticker auth-sticker-2"
+                onerror="this.style.display='none'">
+            <img src="{{ asset('images/asset/5.png') }}" alt="" class="auth-sticker auth-sticker-3"
+                onerror="this.style.display='none'">
+            <img src="{{ asset('images/asset/4.png') }}" alt="" class="auth-sticker auth-sticker-4"
+                onerror="this.style.display='none'">
+
+            <div class="auth-card">
+                <h1>Créer un compte</h1>
+
+                @if($errors->any())
+                    <div class="auth-errors">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form action="{{ route('register') }}" method="POST" class="auth-form">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required placeholder="Votre nom"
+                            value="{{ old('name') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="votre@email.com"
+                            value="{{ old('email') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" id="password" name="password" required placeholder="••••••••">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirmer le mot de passe</label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" required
+                            placeholder="••••••••">
+                    </div>
+
+                    <button type="submit" class="btn-submit">S'inscrire</button>
+                </form>
+
+                <p class="auth-link">
+                    Déjà un compte ? <a href="{{ route('login') }}">Connectez-vous</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="articles-footer">
+            <h3>VS Punk</h3>
+            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens.</p>
+            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
+        </footer>
+    </div>
 </x-layout.app>

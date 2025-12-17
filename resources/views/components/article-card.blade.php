@@ -1,67 +1,40 @@
 @props(['article'])
 
-<div style="
-    border:1px solid #ddd;
-    border-radius:8px;
-    overflow:hidden;
-    box-shadow:0 4px 8px rgba(0,0,0,0.08);
-    background:white;
-">
+<div class="article-card-punk">
+    <div class="card-top">
+        @if($article->image)
+            <div class="card-image">
+                <img src="{{ asset($article->image) }}" alt="{{ $article->titre }}">
+            </div>
+        @endif
 
-    @if($article->image)
-        <img
-                src="{{ asset($article->image) }}"
-                alt="{{ $article->titre }}"
-                style="
-            width:100%;
-            height:180px;
-            object-fit:cover;
-            display:block;
-        "
-        >
-    @endif
-
-    <div>
-        <h2>
-            <a href="{{ route('articles.show', $article) }}">
+        <div class="card-info">
+            <a href="{{ route('articles.show', $article) }}" class="card-title">
                 {{ $article->titre }}
             </a>
-        </h2>
+            <p class="card-author">
+                Par : <a href="{{ route('user.show', $article->editeur->id) }}">{{ $article->editeur->name }}</a>
+            </p>
+            @if($article->rythme)
+                <span class="card-category">{{ $article->rythme->texte }}</span>
+            @endif
+        </div>
+    </div>
 
-        <p>
-            Par
-            <a href="{{ route('user.show', $article->editeur->id) }}">
-                {{ $article->editeur->name }}
+    <div class="card-description">
+        <p>{{ Str::limit($article->texte, 200) }}</p>
+    </div>
+
+    <div class="card-tags">
+        @if($article->rythme)
+            <a href="{{ route('articles.index', ['searchR' => $article->rythme->texte]) }}" class="tag">
+                {{ $article->rythme->texte }}
             </a>
-        </p>
-
-        <ul >
-            <li>
-                Rythme :
-                @if($article->rythme)
-                    <a href="{{ route('articles.index', ['searchR' => $article->rythme->texte]) }}">
-                        {{ $article->rythme->texte }}
-                    </a>
-                @else
-                    Non défini
-                @endif
-            </li>
-
-            <li>
-                Accessibilité :
-                @if($article->accessibilite)
-                    <a href="{{ route('articles.index', ['searchAccess' => $article->accessibilite->texte]) }}">
-                        {{ $article->accessibilite->texte }}
-                    </a>
-                @else
-                    Non définie
-                @endif
-            </li>
-
-        </ul>
-
-        <p >
-            {{ Str::limit($article->texte, 120) }}
-        </p>
+        @endif
+        @if($article->accessibilite)
+            <a href="{{ route('articles.index', ['searchAccess' => $article->accessibilite->texte]) }}" class="tag">
+                {{ $article->accessibilite->texte }}
+            </a>
+        @endif
     </div>
 </div>
