@@ -1022,32 +1022,6 @@ body {
     background: transparent;
 }
 
-
-.punk-audio-player::-webkit-media-controls-panel {
-    background: var(--bg-paper-light);
-    border-radius: 8px;
-}
-
-.punk-audio-player::-webkit-media-controls-play-button {
-    background-color: var(--accent-pink);
-    border-radius: 50%;
-    transform: scale(1.2);
-}
-
-.punk-audio-player::-webkit-media-controls-current-time-display,
-.punk-audio-player::-webkit-media-controls-time-remaining-display {
-    color: var(--text-black);
-    font-family: var(--font-body);
-    font-weight: 600;
-}
-
-.punk-audio-player::-webkit-media-controls-timeline {
-    background: var(--bg-paper);
-    border-radius: 5px;
-    margin: 0 10px;
-}
-
-
 .punk-audio-player::-moz-range-track {
     background: var(--bg-paper);
 }
