@@ -20,8 +20,6 @@ Route::get('/home', function () {
 Route::get('/articles', [ArticleController::class, 'index'])
     ->name('articles.index');
 
-Route::get('/articles/{article}', [ArticleShowController::class, 'show'])
-    ->name('articles.show');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -34,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/articles/{article}/like', [ArticleLikeController::class, 'toggle'])
         ->name('articles.like');
 });
+Route::get('/articles/{article}', [ArticleShowController::class, 'show'])
+    ->name('articles.show');
 
 Route::get('/user/{id}', [UserController::class, 'show'])
     ->name('user.show');
