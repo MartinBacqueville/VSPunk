@@ -25,10 +25,6 @@
             <img src="{{ asset('images/stickers/skull.png') }}" alt="" class="articles-sticker sticker-skull"
                 onerror="this.style.display='none'">
 
-            <div class="articles-search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" placeholder="Rechercher" id="quick-search" onkeyup="filterArticles(this.value)">
-            </div>
         </div>
 
         <!-- les filtre  -->
@@ -77,7 +73,7 @@
                 <path d="M55 12 L70 20 L55 28" stroke="#d4c4a8" stroke-width="3" fill="none" stroke-linecap="round"
                     stroke-linejoin="round" />
             </svg>
-            <a href="{{ route('accueil') }}" class="btn-see-more">Voir plus</a>
+            <a href="{{ route('accueil') }}" class="btn-see-more">Retour à l'accueil</a>
         </div>
 
 
