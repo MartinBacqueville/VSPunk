@@ -1256,7 +1256,7 @@ body {
     border: 2px solid var(--text-black);
 }
 
-/ .empty-message {
+ .empty-message {
     font-family: var(--font-body);
     font-size: 0.9rem;
     color: #666;
