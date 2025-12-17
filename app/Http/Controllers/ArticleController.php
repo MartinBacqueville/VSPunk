@@ -52,4 +52,8 @@ class ArticleController extends Controller
             'articles' => $articles
         ]);
     }
+    public function create()
+    {
+        return view('articles.create');
+    }
 }

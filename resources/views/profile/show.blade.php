@@ -17,6 +17,10 @@
                 <p><span>Inscrit le :</span> {{ $user->created_at->format('d/m/Y') }}</p>
             </div>
 
+            <div>
+                <span><strong>{{ $user->suiveurs->count() }}</strong> followers</span>
+                <span><strong>{{ $user->suivis->count() }}</strong> suivis</span>
+            </div>
 
             <h2>Personnes que vous suivez :</h2>
 
@@ -33,6 +37,26 @@
             @else
                 <p>Vous ne suivez encore personne.</p>
             @endif
+
+            <h2>Articles créés par vous :</h2>
+
+            @if($user->mesArticles->count())
+                <ul>
+                    @foreach($user->mesArticles as $article)
+                        <li>
+                            <a href="{{ route('articles.show', $article->id) }}">
+                                {{ $article->titre ?? 'Sans titre' }}
+                            </a>
+                            @if(!$article->en_ligne)
+                                <span style="color:orange;">(Brouillon)</span>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>Vous n'avez encore créé aucun article.</p>
+            @endif
+
 
 
             <h2>Articles en cours :</h2>
