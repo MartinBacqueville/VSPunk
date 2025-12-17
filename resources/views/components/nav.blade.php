@@ -1,18 +1,16 @@
-<nav>
-    <a href="{{ route('accueil') }}">
-        <img src="{{ asset('images/logo.png') }}" alt="Accueil">
-    </a>
-    <a href="{{route('test-vite')}}">Créer un article</a>
-
+<nav class="top-buttons">
     @auth
-        {{Auth::user()->name}}
-        <a href="{{route("logout")}}"
-           onclick="document.getElementById('logout').submit(); return false;">Logout</a>
-        <form id="logout" action="{{route("logout")}}" method="post">
+        <a href="{{ route('articles.create') }}" class="btn btn-black" id="btn-creer">Ajouter un article</a>
+        <a href="{{ route('profile.show', auth()->id()) }}" class="btn btn-black">{{ auth()->user()->name }}</a>
+        <a href="{{ route('logout') }}" class="btn btn-black" id="btn-connecter"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Se déconnecter
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
             @csrf
         </form>
     @else
-        <a href="{{route("login")}}">Login</a>
-        <a href="{{route("register")}}">Register</a>
+        <a href="{{ route('login') }}" class="btn btn-black" id="btn-connecter">Se connecter</a>
+        <a href="{{ route('register') }}" class="btn btn-black" id="btn-register">S'inscrire</a>
     @endauth
 </nav>

@@ -1,25 +1,13 @@
 <x-layout.app title="Tous les articles">
     <div class="articles-page">
-        <!-- Header punk -->
+
         <header class="articles-header">
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
-            <div class="nav-buttons">
-                @auth
-                    <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
-                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn-outline">Déconnexion</button>
-                    </form>
-                    <div class="avatar"></div>
-                @else
-                    <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
-                @endauth
-            </div>
+            <x-nav></x-nav>
         </header>
 
 
         <div class="articles-search-section">
-            <!-- Stickers de Gagasss-->
             <img src="{{ asset('images/stickers/lightning.png') }}" alt="" class="articles-sticker sticker-lightning"
                 onerror="this.style.display='none'">
             <img src="{{ asset('images/stickers/skull.png') }}" alt="" class="articles-sticker sticker-skull"
@@ -27,7 +15,7 @@
 
         </div>
 
-        <!-- les filtre  -->
+
         <form action="{{ route('articles.index') }}" method="GET" class="articles-filter-form">
             <div class="filter-row">
                 <label for="searchT">Titre :</label>
@@ -52,7 +40,7 @@
             <button type="submit" class="submit-btn">Filtrer</button>
         </form>
 
-        <!-- Sticker en plus-->
+
         <img src="{{ asset('images/stickers/eye.png') }}" alt="" class="articles-sticker sticker-eye"
             onerror="this.style.display='none'">
         <img src="{{ asset('images/stickers/flower.png') }}" alt="" class="articles-sticker sticker-flower"
@@ -75,14 +63,6 @@
             </svg>
             <a href="{{ route('accueil') }}" class="btn-see-more">Retour à l'accueil</a>
         </div>
-
-
-        <footer class="articles-footer">
-            <h3>VS Punk</h3>
-            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens. Projet
-                pédagogique mêlant création de contenu, design et développement web.</p>
-            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
-        </footer>
     </div>
 
     <script>
@@ -100,4 +80,5 @@
             });
         }
     </script>
+    <x-footer></x-footer>
 </x-layout.app>

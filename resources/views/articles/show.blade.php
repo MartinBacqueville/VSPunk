@@ -1,25 +1,12 @@
 <x-layout.app title="{{ $article->titre }}">
     <div class="article-show-page">
-        <!-- Header punk -->
         <header class="articles-header">
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
-            <div class="nav-buttons">
-                @auth
-                    <a href="{{ route('articles.create') }}" class="btn-outline">Ajouter un article</a>
-                    <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="btn-outline">Déconnexion</button>
-                    </form>
-                    <div class="avatar"></div>
-                @else
-                    <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
-                @endauth
-            </div>
+            <x-nav></x-nav>
         </header>
 
         <div class="article-show-container">
             <div class="article-show-card">
-                <!-- Header de l'article avec image et métadonnées -->
                 <div class="article-show-header">
                     @if($article->image)
                         <div class="article-show-image">
@@ -38,7 +25,6 @@
                     </div>
                 </div>
 
-                <!-- Contenu de l'article -->
                 <div class="article-show-content">
                     <h2>Résumé</h2>
                     <p>{{ $article->resume }}</p>
@@ -122,13 +108,6 @@
             </svg>
             <a href="{{ route('articles.index') }}" class="btn-see-more">Retour aux articles</a>
         </div>
-
-        <!-- Footer -->
-        <footer class="articles-footer">
-            <h3>VS Punk</h3>
-            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens. Projet
-                pédagogique mêlant création de contenu, design et développement web.</p>
-            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
-        </footer>
     </div>
+    <x-footer></x-footer>
 </x-layout.app>
