@@ -1,7 +1,7 @@
 <nav class="top-buttons">
     @auth
         <a href="{{ route('articles.create') }}" class="btn btn-black" id="btn-creer">Ajouter un article</a>
-
+        <a href="{{ route('profile.show', auth()->id()) }}" class="btn btn-black">{{ auth()->user()->name }}</a>
         <a href="{{ route('logout') }}" class="btn btn-black" id="btn-connecter"
            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Se déconnecter
