@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Article;
 use App\Http\Controllers\ArticleShowController;
 use App\Http\Controllers\ArticleLikeController;
+use App\Http\Controllers\ArticleCommentController;
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('accueil');
@@ -48,5 +50,10 @@ Route::post('/articles/{article}/like', [ArticleLikeController::class, 'toggle']
 Route::get('/articles/create', function () {
     return 'Page création article (à faire)';
 })->name('articles.create');
+
+Route::post('/articles/{article}/comment', [ArticleCommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('articles.comment');
+
 
 

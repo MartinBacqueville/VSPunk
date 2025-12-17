@@ -84,6 +84,18 @@
                                 👎 {{ $dislikesCount }} dislikes
                             </p>
                         </div>
+
+                        <h3>Laisser un commentaire</h3>
+
+                        <form method="POST" action="{{ route('articles.comment', $article) }}">
+                            @csrf
+
+                            <textarea name="contenu" rows="4" required></textarea>
+
+                            <br>
+
+                            <button type="submit">Publier</button>
+                        </form>
                     @endauth
 
                 </div>
