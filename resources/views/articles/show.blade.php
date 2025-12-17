@@ -33,11 +33,16 @@
                     <p>{!! $article->texte !!}</p>
 
                     @if($article->media)
-                        <h2>Media</h2>
-                        <audio controls>
-                            <source src="{{ $article->media }}">
-                            Votre navigateur ne supporte pas l'audio.
-                        </audio>
+                        <div class="media-player-section">
+                            <h2>Écouter</h2>
+                            <div class="media-player-container">
+                                <div class="media-player-icon">🎵</div>
+                                <audio controls class="punk-audio-player">
+                                    <source src="{{ $article->media }}">
+                                    Votre navigateur ne supporte pas l'audio.
+                                </audio>
+                            </div>
+                        </div>
                     @endif
 
                     <h2>Caractéristiques musicales</h2>
@@ -62,33 +67,36 @@
                             $dislikesCount = $article->likes->where('pivot.nature', 'dislike')->count();
                         @endphp
 
-                        <div style="margin-top: 20px;">
-                            <form method="POST" action="{{ route('articles.like', $article) }}" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="nature" value="like">
-                                <button type="submit">
-                                    👍 Like {{ $userReaction === 'like' ? '(actif)' : '' }}
-                                </button>
-                            </form>
+                        <div class="reactions-section">
+                            <div class="reactions-buttons">
+                                <form method="POST" action="{{ route('articles.like', $article) }}">
+                                    @csrf
+                                    <input type="hidden" name="nature" value="like">
+                                    <button type="submit"
+                                        class="reaction-btn reaction-like {{ $userReaction === 'like' ? 'active' : '' }}">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-text">Like</span>
+                                        <span class="reaction-count">{{ $likesCount }}</span>
+                                    </button>
+                                </form>
 
-                            <form method="POST" action="{{ route('articles.like', $article) }}" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="nature" value="dislike">
-                                <button type="submit">
-                                    👎 Dislike {{ $userReaction === 'dislike' ? '(actif)' : '' }}
-                                </button>
-                            </form>
-
-                            <p>
-                                👍 {{ $likesCount }} likes |
-                                👎 {{ $dislikesCount }} dislikes
-                            </p>
+                                <form method="POST" action="{{ route('articles.like', $article) }}">
+                                    @csrf
+                                    <input type="hidden" name="nature" value="dislike">
+                                    <button type="submit"
+                                        class="reaction-btn reaction-dislike {{ $userReaction === 'dislike' ? 'active' : '' }}">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-text">Dislike</span>
+                                        <span class="reaction-count">{{ $dislikesCount }}</span>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     @endauth
-
                 </div>
             </div>
         </div>
+        //todo
 
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
