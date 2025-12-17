@@ -1,7 +1,7 @@
 <x-layout.app>
     <h1>Profil de {{ $user->name }}</h1>
     @if($user->avatar)
-        <img src="{{ asset('storage/' . $user->avatar) }}" alt="Avatar de {{ $user->name }}" width="150" height="150">
+        <img src="{{ $user->avatar }}" alt="Avatar de {{ $user->name }}" width="150" height="150">
     @else
         <img src="{{ asset('images/default-avatar.png') }}" alt="Avatar par défaut" width="150" height="150">
     @endif
@@ -19,7 +19,7 @@
                     </a>
                     @if($article->image)
                         <br>
-                        <img src="{{ asset('storage' . $article->image) }}" alt="{{ $article->titre }}" width="100">
+                        <img src="{{ $article->image }}" alt="{{ $article->titre }}" width="100">
                     @endif
                 </li>
             @endforeach
@@ -29,7 +29,7 @@
     @endif
 
 
-    <h3>Top 3 rythmes préférés :</h3>
+    <h3>Top 3 rythmes/ambiances préférés :</h3>
 
     <ul>
         @forelse(
@@ -40,15 +40,11 @@
                 ->map(fn($group) => ['rythme' => $group->first(), 'count' => $group->count()])
                 ->sortByDesc('count')
                 ->take(3)
-            as $rythme
-        )
+            as $rythme)
             <li>
-                <a href="{{ route('rythme.show', $rythme['rythme']->id) }}">
-                    {{ $rythme['rythme']->texte }} ({{ $rythme['count'] }} likes)
-                </a>
+                {{ $rythme['rythme']->texte }} ({{ $rythme['count'] }} likes)
                 @if(isset($rythme['rythme']->image))
-                    <br>
-                    <img src="{{ asset('storage' . $rythme['rythme']->image) }}" alt="{{ $rythme['rythme']->texte }}" width="100">
+                    <img src="{{  $rythme['rythme']->image }}" alt="{{ $rythme['rythme']->texte }}" width="100">
                 @endif
             </li>
         @empty
@@ -56,9 +52,7 @@
         @endforelse
     </ul>
 
-
-
-    @auth
+@auth
         @if(auth()->id() !== $user->id)
         <form method="POST" action="{{ route('user.follow', $user->id) }}">
             @csrf
