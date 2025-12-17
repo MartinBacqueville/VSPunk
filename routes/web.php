@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\ArticleController;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Models\Article;
 use App\Http\Controllers\ArticleShowController;
+use App\Http\Controllers\ArticleLikeController;
 
 Route::get('/home', function () {
     return redirect()->route('accueil');
@@ -33,3 +35,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/password', [NewPasswordController::class, 'updateProfilePassword'])
             ->name('profile.password.update');
 });
+Route::post('/articles/{article}/like', [ArticleLikeController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('articles.like');
+
+Route::get('/articles/create', function () {
+    return 'Page création article (à faire)';
+})->name('articles.create');
+
+

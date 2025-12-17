@@ -3,9 +3,7 @@
         <!-- Header punk -->
         <header class="articles-header">
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
-            <div class="nav-buttons">
-                <a href="{{ route('login') }}" class="btn-outline">Se connecter</a>
-            </div>
+            <x-nav></x-nav>
         </header>
 
         <div class="auth-container">
@@ -66,11 +64,6 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="articles-footer">
-            <h3>VS Punk</h3>
-            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens.</p>
-            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
-        </footer>
+        <x-footer></x-footer>
     </div>
 </x-layout.app>
