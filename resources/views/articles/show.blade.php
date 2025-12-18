@@ -105,13 +105,6 @@
                         Publier l'article
                     </button>
                 </form>
-                <form method="POST" action="{{ route('articles.edit', $article->id) }}">
-                    @csrf
-                    <button type="submit"
-                            class="btn btn-green mt-4">
-                        Éditer l'article
-                    </button>
-                </form>
             @endif
                 @if(auth()->id() === $article->editeur->id)
                     <form method="POST" action="{{ route('articles.edit', $article->id) }}">

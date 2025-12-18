@@ -68,13 +68,13 @@ class ArticleController extends Controller
     {
         $validated = $request->validate([
             'titre' => 'required|string|max:255',
-            'resume' => 'nullable|string',
+            'resume' => 'required|string',
             'texte' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'media' => 'nullable|string',
-            'rythme_id' => 'nullable|exists:rythmes,id',
-            'accessibilite_id' => 'nullable|exists:accessibilites,id',
-            'conclusion_id' => 'nullable|exists:conclusions,id',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'media' => 'required|string',
+            'rythme_id' => 'required|exists:rythmes,id',
+            'accessibilite_id' => 'required|exists:accessibilites,id',
+            'conclusion_id' => 'required|exists:conclusions,id',
             'en_ligne' => 'nullable|boolean',
         ]);
 
@@ -118,16 +118,23 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article) {
 
-        $article->update([
-            'titre' => $request->titre,
-            'resume' => $request->resume,
-            'texte' => $request->texte,
-            'image' => $request->image,
-            'media' => $request->media,
-            'rythme_id' => $request->rythme_id,
-            'accessibilite_id' => $request->accessibilite_id,
-            'conclusion_id' => $request->conclusion_id,
+        $article = $request->validate([
+            'titre' => 'required|string|max:255',
+            'resume' => 'required|string',
+            'texte' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'media' => 'required|string',
+            'rythme_id' => 'required|exists:rythmes,id',
+            'accessibilite_id' => 'required|exists:accessibilites,id',
+            'conclusion_id' => 'required|exists:conclusions,id',
+            'en_ligne' => 'nullable|boolean',
         ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('img_articles', 'public');
+            $article->image = 'storage/' . $path;
+            $article->save();
+        }
 
         return redirect()->route('articles.show', $article);
     }
