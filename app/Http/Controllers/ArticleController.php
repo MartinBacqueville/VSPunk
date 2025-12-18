@@ -116,27 +116,31 @@ class ArticleController extends Controller
             'accessibilites' => Accessibilite::all(),
             'conclusions' => Conclusion::all(),'article' => $article]);
     }
-
-    public function update(Request $request, Article $article) {
-
-        $article = $request->validate([
+    public function update(Request $request, Article $article)
+    {
+        $validated = $request->validate([
             'titre' => 'required|string|max:255',
             'resume' => 'required|string',
             'texte' => 'required|string',
-            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:50000',
             'media' => 'required|string',
             'rythme_id' => 'required|exists:rythmes,id',
             'accessibilite_id' => 'required|exists:accessibilites,id',
             'conclusion_id' => 'required|exists:conclusions,id',
             'en_ligne' => 'nullable|boolean',
         ]);
-
+    
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('img_articles', 'public');
-            $article->image = 'storage/' . $path;
-            $article->save();
+            $validated['image'] = 'storage/' . $path;
         }
-
+    
+        $article->update($validated);
+    
         return redirect()->route('articles.show', $article);
     }
+    
 }
+
+
+

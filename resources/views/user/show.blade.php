@@ -1,7 +1,7 @@
 <x-layout.app title="Profil de {{ $user->name }}">
     <div class="user-profile-page">
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}" alt="VS Punk" class="logo-img"></a>
             <div class="nav-buttons">
                 @auth
                     <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>

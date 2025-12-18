@@ -1,13 +1,14 @@
 <x-layout.app title="Créer un compte">
     <div class="auth-page">
-        <!-- Header punk -->
+
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}"
+                    alt="VS Punk" class="logo-img"></a>
             <x-nav></x-nav>
         </header>
 
         <div class="auth-container">
-            <!-- Stickers décoratifs -->
+
             <img src="{{ asset('images/asset/3.png') }}" alt="" class="auth-sticker auth-sticker-1"
                 onerror="this.style.display='none'">
             <img src="{{ asset('images/asset/1.png') }}" alt="" class="auth-sticker auth-sticker-2"

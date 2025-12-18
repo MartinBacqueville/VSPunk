@@ -1,9 +1,15 @@
 <x-layout.app title="{{ $article->titre }}">
     <div class="article-show-page">
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}"
+                    alt="VS Punk" class="logo-img"></a>
             <x-nav></x-nav>
         </header>
+
+        <!-- Stickers décoratifs punk -->
+        <img src="{{ asset('images/asset/Pics.png') }}" alt="" class="article-sticker sticker-pics">
+        <img src="{{ asset('images/asset/Not dead.png') }}" alt="" class="article-sticker sticker-notdead">
+        <img src="{{ asset('images/asset/Étoile.png') }}" alt="" class="article-sticker sticker-etoile">
 
         <div class="article-show-container">
             <div class="article-show-card">
@@ -98,63 +104,72 @@
                         </div>
 
 
-                            @if (!$aDejaCommente)
+                        @if (!$aDejaCommente)
+                            <div class="comment-form-section">
                                 <h3>Laisser un commentaire</h3>
 
-                                <form method="POST" action="{{ route('articles.comment', $article) }}">
+                                <form method="POST" action="{{ route('articles.comment', $article) }}" class="comment-form">
                                     @csrf
-                                    <textarea name="contenu" rows="4" required></textarea>
-                                    <br>
-                                    <button type="submit">Publier</button>
+                                    <div class="form-group">
+                                        <textarea name="contenu" rows="4" required class="comment-textarea"
+                                            placeholder="Écrivez votre commentaire punk ici..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn-comment-submit">🎸 Publier</button>
                                 </form>
-                            @else
-                                <p><em>Vous avez déjà commenté cet article.</em></p>
-                            @endif
+                            </div>
+                        @else
+                            <p class="already-commented"><em>✓ Vous avez déjà commenté cet article.</em></p>
+                        @endif
                     @endauth
 
-                    <h3>Commentaires</h3>
+                    <div class="comments-section">
+                        <h3>Commentaires</h3>
 
-                    @forelse ($article->avis as $avis)
-                        <div>
-                            <strong>{{ $avis->user->name }}</strong>
-                            <p>{{ $avis->contenu }}</p>
+                        @forelse ($article->avis as $avis)
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ $avis->user->name }}</span>
+                                </div>
+                                <p class="comment-content">{{ $avis->contenu }}</p>
 
-                            @auth
-                                @if ($avis->user_id === auth()->id())
-                                    <form method="POST" action="{{ route('avis.destroy', $avis) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">Supprimer</button>
-                                    </form>
-                                @endif
-                            @endauth
-                        </div>
-                    @empty
-                        <p>Aucun commentaire pour le moment.</p>
-                    @endforelse
+                                @auth
+                                    @if ($avis->user_id === auth()->id())
+                                        <form method="POST" action="{{ route('avis.destroy', $avis) }}" class="comment-delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn-delete-comment">🗑️ Supprimer</button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
+                        @empty
+                            <p class="no-comments">Aucun commentaire pour le moment.</p>
+                        @endforelse
+                    </div>
 
                 </div>
             </div>
         </div>
         @auth
             @if(auth()->id() === $article->editeur->id && $article->en_ligne == 0)
-                <form method="POST" action="{{ route('articles.publish', $article->id) }}">
-                    @csrf
-                    <button type="submit"
-                            class="btn btn-green mt-4">
-                        Publier l'article
-                    </button>
-                </form>
+                <div class="article-actions">
+                    <form method="POST" action="{{ route('articles.publish', $article->id) }}">
+                        @csrf
+                        <button type="submit" class="btn-article-action btn-publish">
+                            🚀 Publier l'article
+                        </button>
+                    </form>
+                </div>
             @endif
-                @if(auth()->id() === $article->editeur->id)
-                    <a href="{{ route('articles.edit', $article) }}" class="btn btn-black">
-                        Éditer l’article
-                    </a>
-
-                @endif
         @endauth
 
-      <div class="articles-see-more">
+        <div class="articles-see-more">
+            @auth
+                @if(auth()->id() === $article->editeur->id)
+                    <a href="{{ route('articles.edit', $article) }}" class="btn-see-more btn-edit-article">✏️ Éditer
+                        l'article</a>
+                @endif
+            @endauth
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
                 style="transform: scaleX(-1);">
                 <path d="M5 20 Q20 15, 35 20 T65 20" stroke="#d4c4a8" stroke-width="3" fill="none"

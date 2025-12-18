@@ -2,7 +2,8 @@
     <div class="articles-page">
 
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}"
+                    alt="VS Punk" class="logo-img"></a>
             <x-nav></x-nav>
         </header>
 
@@ -41,17 +42,22 @@
         </form>
 
 
-        <img src="{{ asset('images/stickers/eye.png') }}" alt="" class="articles-sticker sticker-eye"
-            onerror="this.style.display='none'">
-        <img src="{{ asset('images/stickers/flower.png') }}" alt="" class="articles-sticker sticker-flower"
-            onerror="this.style.display='none'">
+
+        <div class="cards-decoration-container">
+
+            <img src="{{ asset('images/asset/2.png') }}" alt="" class="cards-sticker sticker-skull-left">
+            <img src="{{ asset('images/asset/t2.png') }}" alt="" class="cards-sticker sticker-lines-top-right">
+            <img src="{{ asset('images/asset/t3.png') }}" alt="" class="cards-sticker sticker-lines-bottom-left">
+            <img src="{{ asset('images/asset/3.png') }}" alt="" class="cards-sticker sticker-fire-right">
 
 
-        <div class="articles-grid">
-            @foreach($articles as $article)
-                <x-article-card :article="$article" />
-            @endforeach
+            <div class="articles-grid">
+                @foreach($articles as $article)
+                    <x-article-card :article="$article" />
+                @endforeach
+            </div>
         </div>
+
 
 
         <div class="articles-see-more">

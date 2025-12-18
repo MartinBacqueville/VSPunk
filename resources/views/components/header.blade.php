@@ -1,5 +1,7 @@
 <header class="header">
-    {{--  ajouter le logo là --}}
+    <a href="{{ route('accueil') }}" class="home-logo">
+        <img src="{{ asset('images/asset/Logo Vertical.svg') }}" alt="VS Punk" class="home-logo-img">
+    </a>
     <x-nav>
     </x-nav>
     <div class="hero-image-container">

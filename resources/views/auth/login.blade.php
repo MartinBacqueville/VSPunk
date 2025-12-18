@@ -1,8 +1,9 @@
 <x-layout.app title="Connexion">
     <div class="auth-page">
-        <!-- Header punk -->
+
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo">Logo</a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}"
+                    alt="VS Punk" class="logo-img"></a>
             <x-nav></x-nav>
         </header>
 
