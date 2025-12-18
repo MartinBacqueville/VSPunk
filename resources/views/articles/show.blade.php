@@ -93,10 +93,20 @@
                             </div>
                         </div>
                     @endauth
-
                 </div>
             </div>
         </div>
+        @auth
+            @if(auth()->id() === $article->editeur->id && $article->en_ligne == 0)
+                <form method="POST" action="{{ route('articles.publish', $article->id) }}">
+                    @csrf
+                    <button type="submit"
+                            class="btn btn-green mt-4">
+                        Publier l'article
+                    </button>
+                </form>
+            @endif
+        @endauth
 
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
