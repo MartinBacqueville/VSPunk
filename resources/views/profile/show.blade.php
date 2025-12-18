@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="follow-button-container" style="gap: 15px;">
-                    <a href="/" class="btn-follow">⬅ Retour à l'accueil</a>
+                    <a href="{{ route('accueil') }}" class="btn-follow">⬅ Retour à l'accueil</a>
                     <a href="{{ route('profile.edit') }}" class="btn-follow btn-unfollow">✏ Modifier le profil</a>
                 </div>
             </div>
