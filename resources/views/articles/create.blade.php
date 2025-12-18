@@ -1,7 +1,7 @@
 <x-layout.app title="Créer un article">
     <div class="user-profile-page">
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}" alt="VS Punk" class="logo-img"></a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo_Vertical.svg') }}" alt="VS Punk" class="logo-img"></a>
             <div class="nav-buttons">
                 @auth
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
