@@ -82,4 +82,8 @@ Route::post('/articles/{article}/comment', [ArticleCommentController::class, 'st
     ->middleware('auth')
     ->name('articles.comment');
 
+Route::delete('/avis/{avis}', [ArticleCommentController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('avis.destroy');
+
 

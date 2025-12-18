@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Avis;
 use Illuminate\Http\Request;
 
 class ArticleCommentController extends Controller
@@ -32,4 +33,15 @@ class ArticleCommentController extends Controller
 
         return back();
     }
+        public function destroy(Avis $avis)
+    {
+        if ($avis->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $avis->delete();
+
+        return back();
+    }
+
 }
