@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticleController;
@@ -76,3 +77,13 @@ Route::get('/contact', function () {
 Route::get('/test-vite', function () {
     return view('test-vite');
 })->name('test-vite');
+
+Route::post('/articles/{article}/comment', [ArticleCommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('articles.comment');
+
+Route::delete('/avis/{avis}', [ArticleCommentController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('avis.destroy');
+
+

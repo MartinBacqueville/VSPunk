@@ -12,7 +12,9 @@ class ArticleShowController extends Controller
             'editeur',
             'rythme',
             'accessibilite',
-            'conclusion'
+            'conclusion',
+            'avis.user',
+            'likes'
         ]);
 
         $article->increment('nb_vues');

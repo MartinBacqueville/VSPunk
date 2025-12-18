@@ -63,6 +63,10 @@
                                 ->first()
                                 ->pivot->nature ?? null;
 
+                            $aDejaCommente = $article->avis
+                                ->where('user_id', auth()->id())
+                                ->isNotEmpty();
+
                             $likesCount = $article->likes->where('pivot.nature', 'like')->count();
                             $dislikesCount = $article->likes->where('pivot.nature', 'dislike')->count();
                         @endphp
@@ -92,7 +96,43 @@
                                 </form>
                             </div>
                         </div>
+
+
+                            @if (!$aDejaCommente)
+                                <h3>Laisser un commentaire</h3>
+
+                                <form method="POST" action="{{ route('articles.comment', $article) }}">
+                                    @csrf
+                                    <textarea name="contenu" rows="4" required></textarea>
+                                    <br>
+                                    <button type="submit">Publier</button>
+                                </form>
+                            @else
+                                <p><em>Vous avez déjà commenté cet article.</em></p>
+                            @endif
                     @endauth
+
+                    <h3>Commentaires</h3>
+
+                    @forelse ($article->avis as $avis)
+                        <div>
+                            <strong>{{ $avis->user->name }}</strong>
+                            <p>{{ $avis->contenu }}</p>
+
+                            @auth
+                                @if ($avis->user_id === auth()->id())
+                                    <form method="POST" action="{{ route('avis.destroy', $avis) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+                    @empty
+                        <p>Aucun commentaire pour le moment.</p>
+                    @endforelse
+
                 </div>
             </div>
         </div>
@@ -124,7 +164,7 @@
                 @endif
         @endauth
 
-        <div class="articles-see-more">
+      <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
                 style="transform: scaleX(-1);">
                 <path d="M5 20 Q20 15, 35 20 T65 20" stroke="#d4c4a8" stroke-width="3" fill="none"
