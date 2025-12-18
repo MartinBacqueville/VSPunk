@@ -6,6 +6,11 @@
             <x-nav></x-nav>
         </header>
 
+        <!-- Stickers décoratifs punk -->
+        <img src="{{ asset('images/asset/Pics.png') }}" alt="" class="article-sticker sticker-pics">
+        <img src="{{ asset('images/asset/Not dead.png') }}" alt="" class="article-sticker sticker-notdead">
+        <img src="{{ asset('images/asset/Étoile.png') }}" alt="" class="article-sticker sticker-etoile">
+
         <div class="article-show-container">
             <div class="article-show-card">
                 <div class="article-show-header">
@@ -146,20 +151,12 @@
             </div>
         </div>
         @auth
-            @if(auth()->id() === $article->editeur->id)
+            @if(auth()->id() === $article->editeur->id && $article->en_ligne == 0)
                 <div class="article-actions">
-                    @if($article->en_ligne == 0)
-                        <form method="POST" action="{{ route('articles.publish', $article->id) }}">
-                            @csrf
-                            <button type="submit" class="btn-article-action btn-publish">
-                                🚀 Publier l'article
-                            </button>
-                        </form>
-                    @endif
-                    <form method="POST" action="{{ route('articles.edit', $article->id) }}">
+                    <form method="POST" action="{{ route('articles.publish', $article->id) }}">
                         @csrf
-                        <button type="submit" class="btn-article-action btn-edit">
-                            ✏️ Éditer l'article
+                        <button type="submit" class="btn-article-action btn-publish">
+                            🚀 Publier l'article
                         </button>
                     </form>
                 </div>
@@ -167,6 +164,12 @@
         @endauth
 
         <div class="articles-see-more">
+            @auth
+                @if(auth()->id() === $article->editeur->id)
+                    <a href="{{ route('articles.edit', $article) }}" class="btn-see-more btn-edit-article">✏️ Éditer
+                        l'article</a>
+                @endif
+            @endauth
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"
                 style="transform: scaleX(-1);">
                 <path d="M5 20 Q20 15, 35 20 T65 20" stroke="#d4c4a8" stroke-width="3" fill="none"

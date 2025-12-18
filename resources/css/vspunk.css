@@ -906,6 +906,7 @@ body {
 
 .articles-see-more {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px 20px 60px;
@@ -935,6 +936,16 @@ body {
     background-color: var(--text-black);
     color: var(--bg-paper);
     transform: scale(1.05);
+}
+
+.articles-see-more .btn-edit-article {
+    background-color: var(--accent-yellow);
+    border-color: var(--text-black);
+}
+
+.articles-see-more .btn-edit-article:hover {
+    background-color: var(--text-black);
+    color: var(--accent-yellow);
 }
 
 
@@ -1013,6 +1024,64 @@ body {
     background-color: var(--bg-dark);
     min-height: 100vh;
     padding-bottom: 60px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Stickers décoratifs punk */
+.article-sticker {
+    position: fixed;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.9;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.sticker-pics {
+    width: 180px;
+    height: auto;
+    top: 150px;
+    left: 30px;
+    transform: rotate(-15deg);
+}
+
+.sticker-notdead {
+    width: 200px;
+    height: auto;
+    top: 200px;
+    right: 30px;
+    transform: rotate(10deg);
+}
+
+.sticker-etoile {
+    width: 150px;
+    height: auto;
+    bottom: 150px;
+    left: 50px;
+    transform: rotate(-8deg);
+}
+
+@media (max-width: 1200px) {
+    .sticker-pics {
+        width: 140px;
+        left: 15px;
+    }
+
+    .sticker-notdead {
+        width: 160px;
+        right: 15px;
+    }
+
+    .sticker-etoile {
+        width: 120px;
+        left: 20px;
+    }
+}
+
+@media (max-width: 900px) {
+    .article-sticker {
+        display: none;
+    }
 }
 
 .article-show-container {
@@ -2119,6 +2188,141 @@ textarea.form-input {
     }
 
     .reaction-btn {
+        justify-content: center;
+    }
+}
+
+
+.article-edit-page {
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+}
+
+.article-edit-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 25px 60px;
+}
+
+.article-edit-card {
+    background-color: var(--bg-paper);
+    border: 3px solid var(--text-black);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+    padding: 35px;
+}
+
+.article-edit-card h1 {
+    font-family: var(--font-hand);
+    font-size: 2.2rem;
+    color: var(--text-black);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--text-black);
+}
+
+.article-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.form-errors {
+    background-color: rgba(220, 50, 50, 0.15);
+    border: 2px solid #c0392b;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.form-errors ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-errors li {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #c0392b;
+    padding: 4px 0;
+}
+
+.current-file {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-dark);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-save {
+    background-color: var(--text-black);
+    color: var(--bg-paper);
+    border: none;
+    padding: 14px 30px;
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-save:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.35);
+    background-color: var(--accent-pink);
+}
+
+.btn-cancel {
+    background-color: var(--bg-paper-light);
+    color: var(--text-black);
+    border: 2px solid var(--text-black);
+    padding: 14px 30px;
+    font-family: var(--font-hand);
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-cancel:hover {
+    background-color: var(--text-black);
+    color: var(--bg-paper);
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .article-edit-card {
+        padding: 25px 20px;
+    }
+
+    .article-edit-card h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
         justify-content: center;
     }
 }
