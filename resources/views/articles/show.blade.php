@@ -147,13 +147,10 @@
                 </form>
             @endif
                 @if(auth()->id() === $article->editeur->id)
-                    <form method="POST" action="{{ route('articles.edit', $article->id) }}">
-                        @csrf
-                        <button type="submit"
-                                class="btn btn-green mt-4">
-                            Éditer l'article
-                        </button>
-                    </form>
+                    <a href="{{ route('articles.edit', $article) }}" class="btn btn-black">
+                        Éditer l’article
+                    </a>
+
                 @endif
         @endauth
 
