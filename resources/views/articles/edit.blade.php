@@ -19,11 +19,10 @@
                 </div>
             @endif
 
-            <form
-                    action="{{ route('articles.update', $article->id) }}"
-                    method="POST"
-                    enctype="multipart/form-data">
+            <form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+
 
                 <input type="hidden" name="en_ligne" value="0">
 
