@@ -194,10 +194,10 @@ body {
     position: fixed;
     width: 500px;
     height: auto;
-
-
+    z-index: 100;
     opacity: 0.85;
     filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.4));
+    pointer-events: none;
 }
 
 .hand-left {
@@ -697,9 +697,8 @@ body {
 }
 
 
-/* ==========================================
-   CONTENEUR DÉCORATIF AVEC STICKERS
-   ========================================== */
+
+
 .cards-decoration-container {
     position: relative;
     padding: 80px 120px;
@@ -792,38 +791,7 @@ body {
     position: relative;
 }
 
-/* Picks dans les coins des cartes */
-.card-pick {
-    position: absolute;
-    width: 35%;
-    height: auto;
-    z-index: 10;
-    pointer-events: none;
-}
 
-.pick-top-left {
-    top: -12px;
-    left: -12px;
-    transform: rotate(-30deg);
-}
-
-.pick-top-right {
-    top: -12px;
-    right: -12px;
-    transform: rotate(30deg);
-}
-
-.pick-bottom-left {
-    bottom: -12px;
-    left: -12px;
-    transform: rotate(-60deg);
-}
-
-.pick-bottom-right {
-    bottom: -12px;
-    right: -12px;
-    transform: rotate(60deg);
-}
 
 
 .article-card-punk .card-top {
@@ -1151,6 +1119,222 @@ body {
     color: var(--text-dark);
     padding: 8px 0;
     border-bottom: 1px dashed #aaa;
+}
+
+
+.comment-form-section {
+    margin-top: 30px;
+    padding: 25px;
+    background: var(--bg-paper-light);
+    border: 3px solid var(--text-black);
+}
+
+.comment-form-section h3 {
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--text-black);
+    margin-bottom: 15px;
+}
+
+.comments-section {
+    margin-top: 30px;
+}
+
+.comments-section h3 {
+    font-family: var(--font-hand);
+    font-size: 1.4rem;
+    color: var(--text-black);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--text-black);
+}
+
+.comment-item {
+    background: var(--bg-paper-light);
+    border: 2px solid var(--text-black);
+    padding: 15px 20px;
+    margin-bottom: 15px;
+}
+
+.comment-header {
+    margin-bottom: 10px;
+}
+
+.comment-author {
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    color: var(--text-black);
+}
+
+.comment-content {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.comment-delete-form {
+    margin-top: 12px;
+}
+
+.btn-delete-comment {
+    background: transparent;
+    border: 2px solid #dc2626;
+    color: #dc2626;
+    padding: 8px 18px;
+    font-family: var(--font-hand);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-delete-comment:hover {
+    background: #dc2626;
+    color: white;
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 4px 4px 0 rgba(220, 38, 38, 0.3);
+}
+
+.btn-delete-comment:active {
+    transform: scale(1) rotate(0);
+    box-shadow: 2px 2px 0 rgba(220, 38, 38, 0.2);
+}
+
+.no-comments {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    padding: 15px 0;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment-textarea {
+    width: 100%;
+    background-color: var(--bg-paper);
+    border: 3px solid var(--text-black);
+    border-radius: 0;
+    padding: 15px 18px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-black);
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.comment-textarea:focus {
+    outline: none;
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 0 4px rgba(217, 75, 160, 0.25);
+}
+
+.comment-textarea::placeholder {
+    color: #888;
+    font-style: italic;
+}
+
+.btn-comment-submit {
+    align-self: flex-start;
+    background-color: var(--text-black);
+    color: var(--bg-paper);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 0;
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-comment-submit:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.35);
+    background-color: var(--accent-pink);
+}
+
+.btn-comment-submit:active {
+    transform: scale(1) rotate(0);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.already-commented {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    background-color: var(--bg-paper);
+    border: 2px dashed var(--text-black);
+    padding: 15px 20px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+
+.article-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 30px 25px;
+    margin-top: 20px;
+}
+
+.article-actions form {
+    display: inline-block;
+}
+
+.btn-article-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border: 3px solid var(--text-black);
+    border-radius: 0;
+    font-family: var(--font-hand);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.btn-article-action:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.35);
+}
+
+.btn-article-action:active {
+    transform: scale(1) rotate(0);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-publish {
+    background-color: var(--text-black);
+    color: var(--bg-paper);
+}
+
+.btn-publish:hover {
+    background-color: var(--accent-pink);
+}
+
+.btn-edit {
+    background-color: var(--bg-paper);
+    color: var(--text-black);
+}
+
+.btn-edit:hover {
+    background-color: var(--accent-yellow);
+    color: var(--text-black);
 }
 
 

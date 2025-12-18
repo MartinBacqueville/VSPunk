@@ -42,15 +42,15 @@
         </form>
 
 
-        <!-- Conteneur décoratif avec les stickers punk -->
+
         <div class="cards-decoration-container">
-            <!-- Stickers décoratifs -->
+
             <img src="{{ asset('images/asset/2.png') }}" alt="" class="cards-sticker sticker-skull-left">
             <img src="{{ asset('images/asset/t2.png') }}" alt="" class="cards-sticker sticker-lines-top-right">
             <img src="{{ asset('images/asset/t3.png') }}" alt="" class="cards-sticker sticker-lines-bottom-left">
             <img src="{{ asset('images/asset/3.png') }}" alt="" class="cards-sticker sticker-fire-right">
 
-            <!-- Grille d'articles -->
+
             <div class="articles-grid">
                 @foreach($articles as $article)
                     <x-article-card :article="$article" />

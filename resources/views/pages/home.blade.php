@@ -19,26 +19,26 @@
             </div>
         </div>
 
-        <!-- Conteneur décoratif avec les stickers punk -->
+
         <div class="cards-decoration-container">
-            <!-- Stickers décoratifs -->
+
             <img src="{{ asset('images/asset/2.png') }}" alt="" class="cards-sticker sticker-skull-left">
             <img src="{{ asset('images/asset/t2.png') }}" alt="" class="cards-sticker sticker-lines-top-right">
             <img src="{{ asset('images/asset/t3.png') }}" alt="" class="cards-sticker sticker-lines-bottom-left">
             <img src="{{ asset('images/asset/3.png') }}" alt="" class="cards-sticker sticker-fire-right">
 
-            <!-- Grille d'articles -->
+
             <div class="articles-grid">
                 @forelse($articles as $article)
                     <x-article-card :article="$article" />
                 @empty
                     <div style="
-                                grid-column: 1 / -1;
-                                text-align: center;
-                                padding: 60px 20px;
-                                background: #f5e6d3;
-                                border: 3px dashed #000;
-                            ">
+                                    grid-column: 1 / -1;
+                                    text-align: center;
+                                    padding: 60px 20px;
+                                    background: #f5e6d3;
+                                    border: 3px dashed #000;
+                                ">
                         <p style="font-size: 24px; font-weight: bold; margin-bottom: 10px; color: #000;">
                             🎸 Aucun article punk pour le moment
                         </p>
