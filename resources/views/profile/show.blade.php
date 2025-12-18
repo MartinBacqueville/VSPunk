@@ -9,7 +9,6 @@
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
                     </form>
-                    <div class="avatar"></div>
                 @else
                     <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
                 @endauth
@@ -117,12 +116,6 @@
                 </div>
             </div>
         </div>
-
-        <footer class="articles-footer">
-            <h3>VS Punk</h3>
-            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens. Projet
-                pédagogique mêlant création de contenu, design et développement web.</p>
-            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
-        </footer>
     </div>
+    <x-footer/>
 </x-layout.app>

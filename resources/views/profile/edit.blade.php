@@ -9,7 +9,6 @@
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
                     </form>
-                    <div class="avatar"></div>
                 @else
                     <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
                 @endauth
@@ -115,8 +114,8 @@
                 </div>
             </div>
         </div>
-        <x-footer/>
     </div>
+    <x-footer/>
 
     <script>
         function previewAvatar(event) {
