@@ -5,11 +5,11 @@
             <div class="nav-buttons">
                 @auth
                     <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
+                    <a href="{{ route('profile.show', auth()->id()) }}" class="btn-outline">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
                     </form>
-                    <div class="avatar"></div>
                 @else
                     <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
                 @endauth
@@ -44,7 +44,7 @@
                             @foreach($user->likes as $article)
                                 <li class="liked-article-item">
                                     @if($article->image)
-                                        <img src="{{ $article->image }}" alt="{{ $article->titre }}">
+                                        <img src="{{ asset($article->image) }}" alt="{{ $article->titre }}">
                                     @endif
                                     <a href="{{ route('articles.show', $article->id) }}">
                                         {{ $article->titre }}
@@ -97,10 +97,6 @@
             <a href="{{ route('articles.index') }}" class="btn-see-more">Retour aux articles</a>
         </div>
 
-        <footer class="articles-footer">
-            <h3>VS Punk</h3>
-            <p>Plateforme de publication musicale réalisée dans le cadre du Marathon du Web – IUT de Lens. Projet pédagogique mêlant création de contenu, design et développement web.</p>
-            <p class="copyright">© 2025 – Équipe 2 VS Punk • Tous droits réservés</p>
-        </footer>
+        <x-footer/>
     </div>
 </x-layout.app>

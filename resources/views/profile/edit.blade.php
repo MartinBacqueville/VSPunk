@@ -5,6 +5,7 @@
             <div class="nav-buttons">
                 @auth
                     <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
+                    <a href="{{ route('profile.show', auth()->id()) }}" class="btn-outline">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>

@@ -5,6 +5,7 @@
             <div class="nav-buttons">
                 @auth
                     <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
+                    <a href="{{ route('profile.show', auth()->id()) }}" class="btn-outline">{{ auth()->user()->name }}</a>
                     <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
@@ -97,7 +98,7 @@
                             @foreach($user->likes as $article)
                                 <li class="liked-article-item">
                                     @if($article->image)
-                                        <img src="{{ $article->image }}" alt="{{ $article->titre }}">
+                                        <img src="{{ asset($article->image) }}" alt="{{ $article->titre }}">
                                     @endif
                                     <a href="{{ route('articles.show', $article->id) }}">
                                         {{ $article->titre }}

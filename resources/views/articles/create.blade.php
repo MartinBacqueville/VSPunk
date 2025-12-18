@@ -8,7 +8,6 @@
                         @csrf
                         <button type="submit" class="btn-outline">Déconnexion</button>
                     </form>
-                    <div class="avatar"></div>
                 @else
                     <a href="{{ route('login') }}" class="btn-outline">Connexion</a>
                 @endauth
