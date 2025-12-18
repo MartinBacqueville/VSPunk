@@ -63,6 +63,10 @@
                                 ->first()
                                 ->pivot->nature ?? null;
 
+                            $aDejaCommente = $article->avis
+                                ->where('user_id', auth()->id())
+                                ->isNotEmpty();
+
                             $likesCount = $article->likes->where('pivot.nature', 'like')->count();
                             $dislikesCount = $article->likes->where('pivot.nature', 'dislike')->count();
                         @endphp
@@ -93,22 +97,61 @@
                             </div>
                         </div>
 
-                        <h3>Laisser un commentaire</h3>
 
-                        <form method="POST" action="{{ route('articles.comment', $article) }}">
-                            @csrf
+                            @if (!$aDejaCommente)
+                                <h3>Laisser un commentaire</h3>
 
-                            <textarea name="contenu" rows="4" required></textarea>
-
-                            <br>
-
-                            <button type="submit">Publier</button>
-                        </form>
+                                <form method="POST" action="{{ route('articles.comment', $article) }}">
+                                    @csrf
+                                    <textarea name="contenu" rows="4" required></textarea>
+                                    <br>
+                                    <button type="submit">Publier</button>
+                                </form>
+                            @else
+                                <p><em>Vous avez déjà commenté cet article.</em></p>
+                            @endif
                     @endauth
 
+                    <h3>Commentaires</h3>
+
+                    @forelse ($article->avis as $avis)
+                        <div>
+                            <strong>{{ $avis->user->name }}</strong>
+                            <p>{{ $avis->contenu }}</p>
+                        </div>
+                    @empty
+                        <p>Aucun commentaire pour le moment.</p>
+                    @endforelse
                 </div>
             </div>
         </div>
+        @auth
+            @if(auth()->id() === $article->editeur->id && $article->en_ligne == 0)
+                <form method="POST" action="{{ route('articles.publish', $article->id) }}">
+                    @csrf
+                    <button type="submit"
+                            class="btn btn-green mt-4">
+                        Publier l'article
+                    </button>
+                </form>
+                <form method="POST" action="{{ route('articles.edit', $article->id) }}">
+                    @csrf
+                    <button type="submit"
+                            class="btn btn-green mt-4">
+                        Éditer l'article
+                    </button>
+                </form>
+            @endif
+                @if(auth()->id() === $article->editeur->id)
+                    <form method="POST" action="{{ route('articles.edit', $article->id) }}">
+                        @csrf
+                        <button type="submit"
+                                class="btn btn-green mt-4">
+                            Éditer l'article
+                        </button>
+                    </form>
+                @endif
+        @endauth
 
         <div class="articles-see-more">
             <svg class="arrow-svg" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"

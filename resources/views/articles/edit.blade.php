@@ -1,4 +1,4 @@
-<x-layout.app title="Créer un article">
+<x-layout.app title="Éditer l'article">
     <div class="articles-page">
         <header class="articles-header">
             <a href="{{ route('accueil') }}" class="logo">Logo</a>
@@ -7,7 +7,7 @@
 
         <main class="main-content" style="padding:40px; max-width:900px; margin:auto;">
 
-            <h1>Créer un nouvel article</h1>
+            <h1>Éditer l'article</h1>
 
             @if ($errors->any())
                 <div style="color:red; margin-bottom:20px;">
@@ -20,7 +20,7 @@
             @endif
 
             <form
-                    action="{{ route('articles.store') }}"
+                    action="{{ route('articles.update', $article->id) }}"
                     method="POST"
                     enctype="multipart/form-data">
                 @csrf
@@ -29,17 +29,17 @@
 
                 <div class="form-group">
                     <label for="titre">Titre</label>
-                    <input type="text" name="titre" id="titre" required value="{{ old('titre') }}">
+                    <input type="text" name="titre" id="titre" required value="{{ old('titre', $article->titre) }}">
                 </div>
 
                 <div class="form-group">
                     <label for="resume">Résumé</label>
-                    <textarea name="resume" id="resume" rows="3">{{ old('resume') }}</textarea>
+                    <textarea name="resume" id="resume" rows="3">{{ old('resume', $article->resume) }}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="texte">Contenu</label>
-                    <textarea name="texte" id="texte" rows="6" required>{{ old('texte') }}</textarea>
+                    <textarea name="texte" id="texte" rows="6" required>{{ old('texte', $article->texte) }}</textarea>
                 </div>
 
                 <div class="form-group">
@@ -59,7 +59,7 @@
                             name="media"
                             id="media"
                             placeholder="https://exemple.com/audio.mp3"
-                            value="{{ old('media') }}"
+                            value="{{ old('media', $article->media) }}"
                     >
                 </div>
 
@@ -68,7 +68,11 @@
                     <select name="rythme_id" id="rythme_id">
                         <option value="">— Choisir —</option>
                         @foreach($rythmes as $rythme)
-                            <option value="{{ $rythme->id }}">{{ $rythme->texte }}</option>
+                            @if($rythme->id==$article->rythme_id)
+                                <option value="{{ $rythme->id }}" selected>{{ $rythme->texte }}</option>
+                            @else
+                                <option value="{{ $rythme->id }}">{{ $rythme->texte }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -78,7 +82,11 @@
                     <select name="accessibilite_id" id="accessibilite_id">
                         <option value="">— Choisir —</option>
                         @foreach($accessibilites as $accessibilite)
-                            <option value="{{ $accessibilite->id }}">{{ $accessibilite->texte }}</option>
+                            @if($accessibilite->id==$article->accessibilite_id)
+                                <option value="{{ $accessibilite->id }}" selected>{{ $accessibilite->texte }}</option>
+                            @else
+                                <option value="{{ $accessibilite->id }}">{{ $accessibilite->texte }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
@@ -88,7 +96,11 @@
                     <select name="conclusion_id" id="conclusion_id">
                         <option value="">— Choisir —</option>
                         @foreach($conclusions as $conclusion)
-                            <option value="{{ $conclusion->id }}">{{ $conclusion->texte }}</option>
+                            @if($conclusion->id==$article->conclusion_id)
+                                <option value="{{ $conclusion->id }}" selected>{{ $conclusion->texte }}</option>
+                            @else
+                                <option value="{{ $conclusion->id }}">{{ $conclusion->texte }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

@@ -6,18 +6,16 @@ use App\Models\Article;
 
 class ArticleShowController extends Controller
 {
-    public function show(int $id)
+    public function show(Article $article)
     {
-
-        $article = Article::with([
+        $article->load([
             'editeur',
             'rythme',
             'accessibilite',
             'conclusion',
             'avis.user',
             'likes'
-        ])->findOrFail($id);
-
+        ]);
 
         $article->increment('nb_vues');
 
