@@ -38,9 +38,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/articles/{article}/like', [ArticleLikeController::class, 'toggle'])
         ->name('articles.like');
+
+    Route::post('/articles/{article}/publish', [ArticleController::class, 'publish'])
+        ->middleware('auth')
+        ->name('articles.publish');
+
 });
 Route::get('/articles/{article}', [ArticleShowController::class, 'show'])
     ->name('articles.show');
+
+Route::get('/user/{id}', [UserController::class, 'show'])
+    ->name('user.show');
 
 Route::post('/user/{id}/follow', [UserController::class, 'follow'])
     ->name('user.follow');
