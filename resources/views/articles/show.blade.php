@@ -1,7 +1,7 @@
 <x-layout.app title="{{ $article->titre }}">
     <div class="article-show-page">
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}"
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo_Vertical.svg') }}"
                     alt="VS Punk" class="logo-img"></a>
             <x-nav></x-nav>
         </header>

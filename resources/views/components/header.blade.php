@@ -1,6 +1,6 @@
 <header class="header">
     <a href="{{ route('accueil') }}" class="home-logo">
-        <img src="{{ asset('images/asset/Logo Vertical.svg') }}" alt="VS Punk" class="home-logo-img">
+        <img src="{{ asset('images/asset/Logo_Vertical.svg') }}" alt="VS Punk" class="home-logo-img">
     </a>
     <x-nav>
     </x-nav>

@@ -1,7 +1,7 @@
 <x-layout.app title="Profil de {{ $user->name }}">
     <div class="user-profile-page">
         <header class="articles-header">
-            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo Vertical.svg') }}" alt="VS Punk" class="logo-img"></a>
+            <a href="{{ route('accueil') }}" class="logo"><img src="{{ asset('images/asset/Logo_Vertical.svg') }}" alt="VS Punk" class="logo-img"></a>
             <div class="nav-buttons">
                 @auth
                     <a href="{{ route('articles.create') }}" class="btn-outline">ajouter un article</a>
@@ -59,21 +59,20 @@
                     <h3>Top 3 rythmes/ambiances préférés :</h3>
                     <ul class="rythme-list">
                         @forelse(
-                                $user->likes
-                                    ->pluck('rythme')
-                                    ->filter()
-                                    ->groupBy('id')
-                                    ->map(fn($group) => ['rythme' => $group->first(), 'count' => $group->count()])
-                                    ->sortByDesc('count')
-                                    ->take(3)
-                            as $rythme)
+                            $user->likes
+                                ->pluck('rythme')
+                                ->filter()
+                                ->groupBy('id')
+                                ->sortByDesc(fn($group) => $group->count())
+                                ->take(3)
+                            as $rythmeGroup)
                             <li class="rythme-item">
-                                    @if(isset($rythme['rythme']->image))
-                                        <img src="{{ $rythme['rythme']->image }}" alt="{{ $rythme['rythme']->texte }}">
-                                    @endif
-                                    {{ $rythme['rythme']->texte }}
-                                    <span class="rythme-count">{{ $rythme['count'] }} likes</span>
-                                </li>
+                                @if($rythmeGroup->first()->image)
+                                    <img src="{{ $rythmeGroup->first()->image }}" alt="{{ $rythmeGroup->first()->texte }}">
+                                @endif
+                                {{ $rythmeGroup->first()->texte }}
+                                <span class="rythme-count">{{ $rythmeGroup->count() }} likes</span>
+                            </li>
                         @empty
                             <p class="empty-message">Aucun rythme enregistré.</p>
                         @endforelse

@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Rythme;
 use App\Models\Accessibilite;
 use App\Models\Conclusion;
+use App\Notifications\NewArticleNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
