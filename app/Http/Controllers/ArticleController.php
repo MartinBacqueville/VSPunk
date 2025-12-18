@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Rythme;
+use App\Models\Accessibilite;
+use App\Models\Conclusion;
+use App\Notifications\NewArticleNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 
 class ArticleController extends Controller
@@ -52,8 +54,93 @@ class ArticleController extends Controller
             'articles' => $articles
         ]);
     }
+
+
     public function create()
     {
-        return view('articles.create');
+        return view('articles.create', [
+            'rythmes' => Rythme::all(),
+            'accessibilites' => Accessibilite::all(),
+            'conclusions' => Conclusion::all(),
+        ]);
     }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'titre' => 'required|string|max:255',
+            'resume' => 'required|string',
+            'texte' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'media' => 'required|string',
+            'rythme_id' => 'required|exists:rythmes,id',
+            'accessibilite_id' => 'required|exists:accessibilites,id',
+            'conclusion_id' => 'required|exists:conclusions,id',
+            'en_ligne' => 'nullable|boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('img_articles', 'public');
+            $validated['image'] = 'storage/' . $path;
+        }
+
+        $validated['user_id'] = auth()->id();
+        $validated['en_ligne'] = 0;
+        $validated['nb_vues'] = 0;
+
+
+        Article::create($validated);
+
+        return redirect()
+            ->route('articles.index')
+            ->with('success', 'Article créé avec succès');
+    }
+    public function publish(Article $article)
+    {
+        if(auth()->id() !== $article->user_id) {
+            abort(403);
+        }
+
+        $article->en_ligne = 1;
+        $article->save();
+
+        return redirect()->route('articles.show', $article->id)
+            ->with('success', 'Article publié !');
+    }
+    public function edit(Article $article) {
+        if(auth()->id() !== $article->user_id) {
+            abort(403);
+        }
+        return view('articles.edit', [
+            'rythmes' => Rythme::all(),
+            'accessibilites' => Accessibilite::all(),
+            'conclusions' => Conclusion::all(),'article' => $article]);
+    }
+    public function update(Request $request, Article $article)
+    {
+        $validated = $request->validate([
+            'titre' => 'required|string|max:255',
+            'resume' => 'required|string',
+            'texte' => 'required|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:50000',
+            'media' => 'required|string',
+            'rythme_id' => 'required|exists:rythmes,id',
+            'accessibilite_id' => 'required|exists:accessibilites,id',
+            'conclusion_id' => 'required|exists:conclusions,id',
+            'en_ligne' => 'nullable|boolean',
+        ]);
+    
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('img_articles', 'public');
+            $validated['image'] = 'storage/' . $path;
+        }
+    
+        $article->update($validated);
+    
+        return redirect()->route('articles.show', $article);
+    }
+    
 }
+
+
+
